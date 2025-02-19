@@ -2,6 +2,12 @@
 @section('title', 'Welcome Page')
 
 <div>
+    @if('success')
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+    @endif
+    
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewModal">
         Launch demo modal
