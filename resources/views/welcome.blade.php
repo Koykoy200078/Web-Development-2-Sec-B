@@ -2,12 +2,14 @@
 @section('title', 'Welcome Page')
 
 <div>
-    @if('success')
-    <div class="alert alert-success" role="alert">
-        {{ session('success') }}
+    @if(session('success'))
+    <div class="alert alert-success" id="success">
+        {{ Session::get('success') }}
     </div>
     @endif
-    
+
+    <a href="{{ route('auth.logout') }}" class="btn btn-danger" style="float: right;">Logout</a>
+
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewModal">
         Launch demo modal
