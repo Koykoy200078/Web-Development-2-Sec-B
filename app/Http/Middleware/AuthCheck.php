@@ -19,6 +19,7 @@ class AuthCheck
         if (!Session::has('loginId')) {
             return back()->with('fail', 'You need to logged in');
         }
+
         return $next($request);
     }
 }

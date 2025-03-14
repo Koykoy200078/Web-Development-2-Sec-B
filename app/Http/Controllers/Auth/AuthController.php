@@ -11,8 +11,12 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
+    // Login
     public function index()
     {
+        if (Session::has('loginId')) {
+            return redirect()->route('std.myWelcomeView');
+        }
         return view('auth.login');
     }
 
@@ -35,6 +39,32 @@ class AuthController extends Controller
         }
     }
 
+    // Register
+    public function indexRegister()
+    {
+        if (Session::has('loginId')) {
+            return redirect()->route('std.myWelcomeView');
+        }
+        return view('auth.register');
+    }
+
+    public function userRegister(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $input['name'] = $request->name;
+        $input['email'] = $request->email;
+        $input['password'] = bcrypt($request->password);
+        User::create($input);
+
+        return redirect()->route('auth.index')->with('success', 'Registration successful');
+    }
+
+    // Logout
     public function logout()
     {
         if (Session::has('loginId')) {
